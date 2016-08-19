@@ -60,18 +60,19 @@ var status_array = [
 var i = 0;
 
 function increment() {
-  if(i <= gifs_array.length) {
-    i++;
-  } else {
+  if(i > gifs_array.length) {
     i = 0;
+  } else {
+    i++;
   }
   return i;
 }
 
 
 setInterval(function() {
+  console.log(i);
   tweetGif(gifs_array[i], status_array[i]);
-}, 1000*10);
+}, 1000*60);
 
 // tweetGif(gifs_array[1], status_array[1]);
 
@@ -95,8 +96,7 @@ function tweetGif(gif, alternateText) {
           console.log(data)
         })
 
-        console.log(i);
-        increment(); 
+        increment();
 
       } else {
         console.log('Houston we have a problem.');
