@@ -72,7 +72,7 @@ function increment() {
 setInterval(function() {
   console.log(i);
   tweetGif(gifs_array[i], status_array[i]);
-}, 1000*60);
+}, 1000*30);
 
 // tweetGif(gifs_array[1], status_array[1]);
 
