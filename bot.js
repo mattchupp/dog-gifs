@@ -30,13 +30,19 @@ var img = 'img/';
 
 var gifs_array = [
   img + 'pugs.gif',
-  img + 'corgi_dive'
+  img + 'corgi_dive.gif',
+  img + 'balancing.gif',
+  img + 'that_look.gif',
+  img + 'out_the_window.gif',
 ];
 
 var status_array = [
   'pugs running',
-  'diving in'
-]
+  'corgi dive',
+  'balancing',
+  'that look',
+  'out the window'
+];
 
 // function getRandomInt(min, max) {
 //   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -52,15 +58,25 @@ var status_array = [
 // img/corgi_dive.gif
 
 var i = 0;
-function increment(i) {
-  i++;
+
+function increment() {
+  if(i <= gifs_array.length) {
+    i++;
+  } else {
+    i = 0;
+  }
   return i;
 }
 
-setInterval(function() {tweetGif(gifs_array[i], status_array[i], status_array[i])}, 1000*20);
+
+setInterval(function() {
+  tweetGif(gifs_array[i], status_array[i]);
+}, 1000*10);
+
+// tweetGif(gifs_array[1], status_array[1]);
 
 // function to tweet the gifs
-function tweetGif(gif, alternateText, tweetStatus) {
+function tweetGif(gif, alternateText) {
   var b64content = fs.readFileSync(gif, { encoding: 'base64' })
 
   T.post('media/upload', { media_data: b64content }, function (err, data, response) {
@@ -73,12 +89,15 @@ function tweetGif(gif, alternateText, tweetStatus) {
     T.post('media/metadata/create', meta_params, function (err, data, response) {
       if (!err) {
         // now we can reference the media and post a tweet (media will attach to the tweet)
-        var params = { status: tweetStatus, media_ids: [mediaIdStr] }
+        var params = { status: '', media_ids: [mediaIdStr] }
 
         T.post('statuses/update', params, function (err, data, response) {
           console.log(data)
         })
-        increment(i);
+
+        console.log(i);
+        increment(); 
+
       } else {
         console.log('Houston we have a problem.');
       }
