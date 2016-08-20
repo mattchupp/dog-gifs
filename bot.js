@@ -8,23 +8,6 @@ var config = require('./config');
 
 var T = new Twit(config);
 
-// set up user stream
-// var stream = T.stream('user');
-
-// anytime someone follows me follow them back
-// stream.on('tweet', tweetEvent);
-//
-// function tweetEvent(event) {
-//   var replyto = event.in_reply_to_screen_name;
-//   var text = event.text;
-//   var fr = event.user.screen_name;
-//
-//   if (replyto == 'helloitsme541') {
-//     var newTweet = '@' + fr + ' thank you for tweeting at me!';
-//     tweetIt(newTweet);
-//   }
-// }
-
 // folder name for images
 var img = 'img/';
 
@@ -34,33 +17,22 @@ var gifs_array = [
   img + 'balancing.gif',
   img + 'that_look.gif',
   img + 'out_the_window.gif',
+  img + 'sunglasses.gif',
+  img + 'what.gif',
+  img + 'doggy_door.gif',
+  img + 'bathtub.gif',
+  img + 'treadmill.gif',
+  img + 'mirror.gif',
+  img + 'stevie.gif',
+  img + 'puppy_eyes.gif',
+  img + 'dog_bear.gif',
+  img + 'hostess.gif'
 ];
-
-var status_array = [
-  'pugs running',
-  'corgi dive',
-  'balancing',
-  'that look',
-  'out the window'
-];
-
-// function getRandomInt(min, max) {
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-
-// tweet
-// tweetIt();
-// setInterval(tweetIt, 1000*30);
-
-// var gifToTweet = 'img/pugs.gif';
-// var alt = 'Pugs running';
-// var status = 'Running Pugs'
-// img/corgi_dive.gif
 
 var i = 0;
 
 function increment() {
-  if(i > gifs_array.length) {
+  if(i === gifs_array.length) {
     i = 0;
   } else {
     i++;
@@ -68,23 +40,21 @@ function increment() {
   return i;
 }
 
-
+// set interval to tweet every 12 hours
 setInterval(function() {
-  console.log(i);
-  tweetGif(gifs_array[i], status_array[i]);
-}, 1000*30);
+  tweetGif(gifs_array[i]);
+}, 1000*60*60*6);
 
-// tweetGif(gifs_array[1], status_array[1]);
 
 // function to tweet the gifs
-function tweetGif(gif, alternateText) {
+function tweetGif(gif) {
   var b64content = fs.readFileSync(gif, { encoding: 'base64' })
 
   T.post('media/upload', { media_data: b64content }, function (err, data, response) {
     // now we can assign alt text to the media, for use by screen readers and
     // other text-based presentations and interpreters
     var mediaIdStr = data.media_id_string
-    var altText = alternateText
+    var altText = 'dog gif'
     var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } }
 
     T.post('media/metadata/create', meta_params, function (err, data, response) {
@@ -96,6 +66,7 @@ function tweetGif(gif, alternateText) {
           console.log(data)
         })
 
+        // move up in the array
         increment();
 
       } else {
@@ -103,18 +74,4 @@ function tweetGif(gif, alternateText) {
       }
     })
   })
-}
-
-// function for tweeting
-function tweetIt(txt) {
-  // tweet
-  var tweet = {
-    status: txt
-  }
-
-  T.post('statuses/update', tweet , tweeted);
-
-  function tweeted(err, data, response) {
-    console.log(data)
-  }
 }
