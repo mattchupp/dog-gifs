@@ -40,7 +40,7 @@ function increment() {
   return i;
 }
 
-// set interval to tweet every 12 hours
+// set interval to tweet every 6 hours
 setInterval(function() {
   tweetGif(gifs_array[i]);
 }, 1000*60*60*6);
