@@ -4,9 +4,11 @@
 // the things i need
 var fs = require('fs');
 var Twit = require('twit');
-var config = require('./config');
+var config = require('.config');
 
 var T = new Twit(config);
+
+console.log('Puppy Gifs are ready to fire');
 
 // folder name for images
 var img = 'img/';
@@ -26,13 +28,36 @@ var gifs_array = [
   img + 'stevie.gif',
   img + 'puppy_eyes.gif',
   img + 'dog_bear.gif',
-  img + 'hostess.gif'
+  img + 'hostess.gif',
+  img + 'air_swim.gif',
+  img + 'vent.gif',
+  img + 'running.gif',
+  img + 'head_turn.gif',
+  img + 'surfing_on_dog.gif',
+  img + 'headshake.gif',
+  img + 'paw_down.gif',
+  img + 'paw_down_walk.gif',
+  img + 'swimming.gif',
+  img + 'excited.gif',
+  img + 'out_of_the_box.gif',
+  img + 'rolling_around.gif',
+  img + 'look_away.gif',
+  img + 'adorbs.gif',
+  img + 'in_circles.gif',
+  img + 'spazz.gif',
+  img + 'yawn.gif',
+  img + 'run_in_place_on_bed.gif',
+  img + 'dog_lick.gif',
+  img + 'running_in_place.gif',
+  img + 'wrap_up.gif'
 ];
 
-var i = 0;
+var i = 3;
 
+// when i > length of array (all the way through array)
+// then start over! :)
 function increment() {
-  if(i === gifs_array.length) {
+  if (i === gifs_array.length - 1) {
     i = 0;
   } else {
     i++;
