@@ -4,7 +4,7 @@
 // the things i need
 var fs = require('fs');
 var Twit = require('twit');
-var config = require('.config');
+var config = require('./config');
 
 var T = new Twit(config);
 
