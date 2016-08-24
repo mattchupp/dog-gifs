@@ -52,7 +52,7 @@ var gifs_array = [
   img + 'wrap_up.gif'
 ];
 
-var i = 3;
+var i = 6;
 
 // when i > length of array (all the way through array)
 // then start over! :)
