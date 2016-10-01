@@ -14,16 +14,6 @@ console.log('Puppy Gifs are ready to fire');
 var img = 'img/';
 
 var gifs_array = [
-  img + 'pugs.gif',
-  img + 'corgi_dive.gif',
-  img + 'balancing.gif',
-  img + 'that_look.gif',
-  img + 'out_the_window.gif',
-  img + 'sunglasses.gif',
-  img + 'what.gif',
-  img + 'doggy_door.gif',
-  img + 'bathtub.gif',
-  img + 'treadmill.gif',
   img + 'mirror.gif',
   img + 'stevie.gif',
   img + 'puppy_eyes.gif',
@@ -52,15 +42,14 @@ var gifs_array = [
   img + 'wrap_up.gif'
 ];
 
-var i = 6;
+var i = 0;
 
 // when i > length of array (all the way through array)
 // then start over! :)
 function increment() {
+  i++;
   if (i === gifs_array.length - 1) {
     i = 0;
-  } else {
-    i++;
   }
   return i;
 }
@@ -68,7 +57,7 @@ function increment() {
 // set interval to tweet every 6 hours
 setInterval(function() {
   tweetGif(gifs_array[i]);
-}, 1000*60*60*6);
+}, 1000*60*60*7);
 
 
 // function to tweet the gifs
@@ -91,6 +80,7 @@ function tweetGif(gif) {
           console.log(data)
         })
 
+        console.log(gifs_array[i]);
         // move up in the array
         increment();
 
